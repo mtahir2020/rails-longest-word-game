@@ -1,0 +1,13 @@
+<div class="d-flex align-items-center flex-column pb-4">
+  <div> Our user word: <%= @user_word %> </div>
+  <div> Generated word: <%= @letters %> </div>
+
+  <div> <%= @word_data %></div>
+  <div> <%= @response %> </div>
+  <div> <%= @true_or_false %> </div>
+  <div> <%= @word_length %> </div>
+  <div> <%= @points_string %> </div>
+
+
+  <p class=" border-1 border p-3 mt-4 btn btn-lg rounded-2"><%= link_to "Play again", new_path%></p>
+</div>
