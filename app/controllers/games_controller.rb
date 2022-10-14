@@ -14,6 +14,10 @@ class GamesController < ApplicationController
     end
     # generated_word
     @letters = letters_array.join
+
+    # Cookies=========================================
+    # @comment = Comment.new(author: cookies[:commenter_name])
+
   end
 
   # ======== POST to score action ==============
@@ -42,17 +46,24 @@ class GamesController < ApplicationController
     # Length of word
     @word_length = @word_data["length"]
 
+    # Total score
+    @total_score = 0;
+
     # Check if word is valid according to API and fulfils rules of game
-    if check_overuse && @true_or_false == false
-      @response = "You stayed within the rules, but the word is not English"
-    elsif check_overuse && @true_or_false
+    if check_overuse && @true_or_false
       @points_for_letters = @word_length * 4
+      @total_score += @points_for_letters
       @response = "Word was within the rules and is English!"
       @points_string = "#{@points_for_letters} points!"
+    elsif check_overuse && @true_or_false == false
+      @response = "You stayed within the rules, but the word is not English"
+      @points_string = "0 points :("
     elsif check_overuse == false && @true_or_false == false
       @response = "Better luck next time buddy, pathetic attempt"
+      @points_string = "0 points :("
     else
       @response = "Your word was out of the rules, but the word was real"
+      @points_string = "0 points :("
     end
 
   end
